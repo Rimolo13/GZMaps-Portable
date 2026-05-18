@@ -80,25 +80,6 @@ let edit_mode = 0;
 async function edit_switch() {
   if (edit_mode == 0) {
     const getpassword = prompt("Password:");
-    const code_words = [
-      "LemmyIsGod",
-      "PrinceOfFuckingDarkness",
-      "ComeTouchMyMetalMachine",
-      "MetalGods",
-    ];
-    const nice_links = [
-      "https://youtu.be/fM1UPeAOyHM?si=B5QVM3Gl32ScGb6w",
-      "https://youtu.be/S6A13bOB76A?si=bw6tJRjNZ_Gt4rA7",
-      "https://youtube.com/shorts/mTQffwXF1k8?si=QN8msGXkStp0srmz",
-      "https://youtu.be/CLWlCQZy87g?si=nNuZagMzejflPyff",
-    ];
-    for (let i = 0; i < code_words.length; i++) {
-      if (getpassword === code_words[i]) {
-        console.log(code_words[i], nice_links[i]);
-        window.open(nice_links[i], "_blank");
-        return;
-      }
-    }
     if (getpassword != "" && getpassword != null) {
       const password_valid = await fetch("/t/POSTPassword", {
         method: "POST",
