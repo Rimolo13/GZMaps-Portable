@@ -147,15 +147,15 @@ function load() {
 
 //switch maps
 const routes = [
-  "/full-map",
-  "/house-1",
-  "/house-2",
-  "/house-3",
-  "/house-4",
-  "/house-5",
-  "/house-6",
-  "/house-8",
-  "/house-11",
+  "/#/full-map",
+  "/#/house-1",
+  "/#/house-2",
+  "/#/house-3",
+  "/#/house-4",
+  "/#/house-5",
+  "/#/house-6",
+  "/#/house-8",
+  "/#/house-11",
 ];
 
 const houses_ids = [
