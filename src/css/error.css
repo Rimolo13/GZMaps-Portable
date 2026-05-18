@@ -1,0 +1,36 @@
+﻿:root {
+  --background-color: rgb(255, 255, 250);
+  --text-color: rgb(255, 0, 0);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: rgb(0, 0, 0);
+    --text-color: rgb(197, 30, 70);
+  }
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Times New Roman", Times, serif;
+  color: var(--text-color);
+  font-size: 2em;
+  font-weight: bolder;
+  text-align: center;
+  transition: all 0.5s;
+  overflow: hidden;
+}
+
+html,
+body {
+  height: 100dvh;
+  width: 100dvw;
+}
+
+body {
+  display: flex;
+  background: var(--background-color);
+  justify-content: center;
+  align-items: center;
+}

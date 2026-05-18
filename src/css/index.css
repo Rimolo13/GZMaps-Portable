@@ -1,0 +1,326 @@
+:root {
+  --background-color: rgb(255, 255, 250);
+  --bar-background-color: rgb(226, 226, 224);
+  --button-color: rgb(6, 110, 90);
+  --button-color-hover: rgb(6, 150, 130);
+  --text-color: rgb(255, 255, 250);
+  --text-bar-color: rgb(3, 3, 0);
+  --houses-color: rgb(3, 90, 70);
+  --houses-color-hover: rgb(3, 130, 110);
+  --corridors-color: rgb(30, 70, 50);
+  --basements-color: rgb(3, 75, 55);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: rgb(0, 0, 0);
+    --bar-background-color: rgb(31, 31, 29);
+    --button-color: rgb(6, 70, 50);
+    --button-color-hover: rgb(6, 30, 10);
+    --text-bar-color: rgb(255, 255, 250);
+    --houses-color-hover: rgb(3, 50, 30);
+  }
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif, Times, serif;
+  color: var(--text-color);
+  font-size: 1.03em;
+  font-weight: bolder;
+  text-align: center;
+  transition: all 0.5s;
+  overflow: hidden;
+  user-select: none;
+}
+
+html,
+body {
+  height: 100dvh;
+  width: 100dvw;
+}
+
+body {
+  display: grid;
+  background: var(--background-color);
+  grid-template-rows: 10% 80% 10%;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.not-displayed {
+  display: none !important;
+}
+
+.headline {
+  font-size: 1.5em;
+}
+
+.bar {
+  display: flex;
+  background: var(--bar-background-color);
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.bar-text {
+  color: var(--text-bar-color);
+}
+
+.button {
+  background: var(--button-color);
+  padding: 5%;
+  border-radius: 13px;
+  margin: 5%;
+}
+
+.button:hover {
+  background: var(--button-color-hover);
+}
+
+#edit-button {
+  margin: 0% 5% 5% 5%;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+}
+
+#edit-bar {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+}
+
+#save-bar {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  flex-direction: column;
+}
+
+#full-map {
+  display: grid;
+  justify-self: center;
+  align-self: center;
+  aspect-ratio: 1/1;
+  max-width: 100dvw;
+  grid-template-columns: repeat(32, 1fr);
+  grid-template-rows: repeat(32, 1fr);
+  grid-template-areas:
+    ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . d d d d d . . . . . . . e e e . . . ."
+    ". . . . . . . . . . . . . d d d d d . . . . . . . e e e . . . ."
+    ". . . . . . . . . . . . . d d d d d . . . . . . . e e e . . . ."
+    ". . . . . . . . . . . . . d d d d d . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . d d d d d . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . . y . . . . . . . . . f f f . . . ."
+    ". . . . . . . . . . . . . . . y . . . . . . . . . f f f . . . ."
+    ". . . . . . . c c c c c c c c c c c c c c c c c . f f f . . . ."
+    ". . . . . . . c c c c c c c c c c c c c c c c c . f f f . . . ."
+    ". . . . . . . c c c c c c c c c c c c c c c c c . f f f . . . ."
+    ". . . . . . . . . x . . . . . . . . . . . . z . . . . . . . . ."
+    ". . . . . . . . . x . . . . . . . . . . . a a a . . . . . . . ."
+    ". . . . . . . . . x . . . . . . . . . . . a a a . . . . . . . ."
+    ". . . . . . . . b b b . . . . . . . . . . a a a . . . . . . . ."
+    ". . . . . . . . b b b . . . . . . . . . . a a a . . . . . . . ."
+    ". . . . . . . . b b b . . . . . . . . . . a a a . . . . . . . ."
+    ". . . . . . . . b b b . . . . . . . . . . a a a . . . . . . . ."
+    ". . . . . . . . b b b . . . . . . . . . . a a a . . . . . . . ."
+    ". . . . . . . . b b b . . . . . . . . . . a a a . . . . . . . ."
+    ". . . . . . . . b b b . . . . . . . . . . a a a . . . . . . . ."
+    ". . . . . . . . b b b . . . . . . . . . . a a a . . . . . . . ."
+    ". . . . . . . . b b b . . . . . . . . . . a a a . . g g . . . ."
+    ". . . . . . . . b b b . . . . . . . . . . a a a . . g g . . . ."
+    ". . . . . . . . b b b . . . . . . . . . . a a a . . g g . . . ."
+    ". . . . . . . . b b b . . . . . . . . . . a a a . . g g . . . ."
+    ". . . . . . . . . . . . . . . . . . . . . a a a . . g g . . . ."
+    ". . . . . . . . . . . . . . . . . . . . . . . . . . g g . . . ."
+    ". . . . . . . . . . . . . . . . . . . . . . . . . . g g . . . ."
+    ". . . . . . . . . . . . . h h . . . . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . h h . . . . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
+}
+
+.full-map-scale-hight {
+  height: 100%;
+  width: auto;
+}
+
+.full-map-scale-width {
+  height: auto;
+  width: 100%;
+}
+
+.houses {
+  display: grid;
+  background: var(--houses-color);
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.houses:hover {
+  background: var(--houses-color-hover);
+}
+
+.corridors {
+  display: grid;
+  background: var(--corridors-color);
+  height: 100%;
+  width: 100%;
+}
+
+#house-1 {
+  grid-area: a;
+}
+
+#house-2 {
+  grid-area: b;
+}
+
+#house-3 {
+  grid-area: c;
+}
+
+#house-4 {
+  grid-area: d;
+}
+
+#house-5 {
+  grid-area: e;
+}
+
+#house-6 {
+  grid-area: f;
+}
+
+#house-8 {
+  grid-area: g;
+}
+
+#house-11 {
+  grid-area: h;
+}
+
+.corridor-1 {
+  grid-area: z;
+}
+
+.corridor-2 {
+  grid-area: y;
+}
+
+.corridor-3 {
+  grid-area: x;
+}
+
+.houses-map {
+  display: grid;
+  justify-self: center;
+  align-self: center;
+  height: 90%;
+  width: 90%;
+  background: var(--houses-color);
+  border-radius: 13px;
+}
+
+.houses-map p {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border: solid var(--houses-color-hover) 1px;
+}
+
+.houses-map input {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border: solid var(--houses-color-hover) 1px;
+  background: var(--houses-color);
+  outline: none;
+}
+
+.basements {
+  background: var(--basements-color) !important;
+}
+
+.house-1-map {
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.house-2-map {
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.house-3-map {
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: 40% 20% 40%;
+}
+
+.house-4-map {
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: 100%;
+}
+
+.house-5-map {
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: 100%;
+}
+
+.house-6-map {
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: 100%;
+}
+
+.house-8-map {
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.house-11-map {
+  grid-template-rows: 100%;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (orientation: portrait) {
+  main {
+    display: grid;
+    grid-template-columns: unset;
+    grid-template-rows: 10% 80% 10%;
+  }
+
+  .bar {
+    flex-direction: column;
+  }
+
+  .button {
+    padding: 1%;
+    margin: 1%;
+  }
+
+  #edit-button {
+    margin: 1% 1% 1% 0%;
+  }
+
+  #edit-bar,
+  #save-bar {
+    flex-direction: row;
+  }
+}
