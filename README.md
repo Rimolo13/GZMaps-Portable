@@ -6,4 +6,5 @@ GZMaps-Portable is built with HTML/CSS/JS
 No external libraries are used
 
 ## How to Use
-Just open the index.html in the src Dir.
+Use a local host.
+Just clicking on the HTML is not possible at the moment.
