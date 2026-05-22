@@ -1,4 +1,4 @@
-const version = "1.01";
+const version = "1.02";
 const app = document.getElementById("app");
 const app_version = document.getElementById("app").getAttribute("name");
 const link_list = [
