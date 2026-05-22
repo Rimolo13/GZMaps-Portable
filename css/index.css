@@ -94,7 +94,10 @@ body {
 main {
   display: grid;
   grid-template-columns: 15% 70% 15%;
-  background: radial-gradient(var(--background-second-color), var(--background-color) 100%);
+  background: radial-gradient(
+    var(--background-second-color),
+    var(--background-color) 100%
+  );
 }
 
 #edit-bar {
