@@ -22,6 +22,7 @@ function linkmaker(listlinknumber) {
 
 async function load() {
   app.innerHTML = await (await fetch(linkmaker(2))).text();
+  document.getElementById("title").textContent = "GZMaps - Gesamte Karte";
   document.getElementById("icon").href = linkmaker(0);
   document.getElementById("css").href = linkmaker(1);
   import(linkmaker(3));
