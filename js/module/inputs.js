@@ -1,25 +1,3 @@
-﻿//resize fullmap
-const full_map = document.getElementById("full-map");
-const height_70p = (window.innerHeight / 100) * 70;
-
-correct_resize();
-
-window.addEventListener("resize", () => {
-  setTimeout(correct_resize, 150)
-});
-
-function correct_resize() {
-  console.log("test")
-  if (window.innerWidth < height_70p) {
-    full_map.classList.add("full-map-scale-width");
-    full_map.classList.remove("full-map-scale-hight");
-  } else {
-    full_map.classList.add("full-map-scale-hight");
-    full_map.classList.remove("full-map-scale-width");
-  }
-}
-
-//all about inputs
 const houses_maps_ids = [
   "full-map",
   "house-1-map",
@@ -77,7 +55,7 @@ async function save() {
   edit_switch();
 }
 
-let edit_mode = 0;
+export let edit_mode = 0;
 async function edit_switch() {
   if (edit_mode == 0) {
     const getpassword = prompt("Password:");
@@ -131,7 +109,7 @@ async function edit_switch() {
 }
 
 load_values();
-async function load_values() {
+export async function load_values() {
   try {
     value_list = (await (await fetch("/t/GETMapData")).json()).values;
     load();
@@ -145,98 +123,3 @@ function load() {
     }
   }
 }
-
-//switch maps
-const routes = [
-  "#full-map",
-  "#house-1",
-  "#house-2",
-  "#house-3",
-  "#house-4",
-  "#house-5",
-  "#house-6",
-  "#house-8",
-  "#house-11",
-];
-
-const houses_ids = [
-  "back-to-full-map",
-  "house-1",
-  "house-2",
-  "house-3",
-  "house-4",
-  "house-5",
-  "house-6",
-  "house-8",
-  "house-11",
-];
-
-const title_maps = [
-  "Gesamte Karte",
-  "Haus 1",
-  "Haus 2",
-  "Haus 3",
-  "Haus 4",
-  "Haus 5",
-  "Haus 6",
-  "Haus 8",
-  "Haus 11",
-];
-
-const edit_bar = document.getElementById("edit-bar");
-
-["load", "popstate"].forEach((e) => window.addEventListener(e, repage));
-
-function repage() {
-  for (let i = 0; i < routes.length; i++) {
-    if (routes[i] === window.location.hash) {
-      switchmap(i);
-      return;
-    }
-  }
-  let path = routes[0];
-  history.pushState({}, "", path);
-  switchmap(0);
-}
-
-for (let i = 0; i < routes.length; i++) {
-  const houses = document.getElementById(houses_ids[i]);
-  let path = routes[i];
-  houses.addEventListener("click", () => {
-    history.pushState({}, "", path);
-    switchmap(i);
-  });
-}
-
-async function switchmap(map) {
-  load_values();
-  for (let i = 0; i < houses_maps_ids.length; i++) {
-    if (i === map) {
-      document.title = `GZMaps - ${title_maps[i]}`;
-      document.getElementById("header").textContent =
-        `GZMaps - ${title_maps[i]}`;
-      const activ_map = document.getElementById(houses_maps_ids[i]);
-      activ_map.classList.add("hidden");
-      activ_map.classList.remove("not-displayed");
-      setTimeout(() => {
-        activ_map.classList.remove("hidden");
-      }, 30);
-      if (map === 0) {
-        edit_bar.classList.add("hidden");
-        if (edit_mode === 1) {
-          edit_switch();
-        }
-      } else {
-        edit_bar.classList.remove("hidden");
-      }
-    } else {
-      const inactiv_map = document.getElementById(houses_maps_ids[i]);
-      inactiv_map.classList.add("not-displayed");
-    }
-  }
-}
-
-//date for copyright
-const copyright = document.getElementById("copyright");
-let date_now = new Date();
-copyright.textContent = `©${date_now.getUTCFullYear()}\u00A0`;
