@@ -17,7 +17,6 @@
         --button-color: rgb(6, 110, 90);
         --button-color-hover: rgb(6, 150, 130);
         --text-color: rgb(255, 255, 250);
-        --text-bar-color: rgb(3, 3, 0);
         --houses-color: rgb(3, 90, 70);
         --houses-color-hover: rgb(3, 130, 110);
         --corridors-color: rgb(30, 70, 50);
@@ -31,7 +30,6 @@
           --bar-background-color: rgb(31, 31, 29);
           --button-color: rgb(6, 70, 50);
           --button-color-hover: rgb(6, 30, 10);
-          --text-bar-color: rgb(255, 255, 250);
           --houses-color-hover: rgb(3, 50, 30);
         }
       }
@@ -81,15 +79,11 @@
         align-items: center;
       }
 
-      .bar-text {
-        color: var(--text-bar-color);
-      }
-
       .button {
         background: var(--button-color);
         width: max-content;
-        padding: 5%;
         border-radius: 7px;
+        padding: 5%;
         margin: 5%;
       }
 
@@ -97,8 +91,25 @@
         background: var(--button-color-hover);
       }
 
+      .input {
+        outline: none;
+        border: solid var(--houses-color-hover) 1px;
+        background: var(--houses-color);
+      }
+
+      .select {
+        background: linear-gradient(
+          90deg,
+          rgb(47, 47, 47) 10%,
+          rgb(97, 97, 97) 50%,
+          rgb(47, 47, 47) 90%
+        );
+        padding: 1%;
+        border-radius: 7px;
+      }
+
       #settings {
-        display: flex;
+        display: none;
         flex-direction: column;
         position: absolute;
         background: radial-gradient(
@@ -115,11 +126,19 @@
 
       #settings ul li {
         display: grid;
-        justify-content: center;
+        justify-items: center;
       }
 
       #settings ul li .button {
         justify-self: center;
+        padding: 1%;
+        margin: 1%;
+      }
+
+      #server-input {
+        text-align: left;
+        border-radius: 7px;
+        padding: 1%;
       }
 
       #app {
@@ -163,7 +182,8 @@
         max-width: 100dvw;
         grid-template-columns: repeat(32, 1fr);
         grid-template-rows: repeat(32, 1fr);
-        grid-template-areas:
+      }
+      /*grid-template-areas:
           ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
           ". . . . . . . . . . . . . d d d d d . . . . . . . e e e . . . ."
           ". . . . . . . . . . . . . d d d d d . . . . . . . e e e . . . ."
@@ -196,7 +216,7 @@
           ". . . . . . . . . . . . . h h . . . . . . . . . . . . . . . . ."
           ". . . . . . . . . . . . . h h . . . . . . . . . . . . . . . . ."
           ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
-      }
+      */
 
       .full-map-scale-hight {
         height: 100%;
@@ -230,21 +250,22 @@
       }
 
       #house-1 {
-        grid-area: a;
+        grid-area: 13 / 22 / 28 / 25;
       }
 
       #house-2 {
-        grid-area: b;
+        grid-area: 15 / 9 / 27 / 12;
       }
 
       #house-3 {
-        grid-area: c;
+        grid-area: 9 / 8 / 12 / 25;
       }
 
       #house-4 {
-        grid-area: d;
+        grid-area: 2 / 14 / 7 / 19;
       }
 
+      /*
       #house-5 {
         grid-area: e;
       }
@@ -271,7 +292,7 @@
 
       .corridor-3 {
         grid-area: x;
-      }
+      }*/
 
       .houses-map {
         display: grid;
@@ -298,9 +319,6 @@
         width: 100%;
         justify-content: center;
         align-items: center;
-        border: solid var(--houses-color-hover) 1px;
-        background: var(--houses-color);
-        outline: none;
       }
 
       .basements {
@@ -494,6 +512,7 @@
           input.id = `h${i}-${x}`;
           input.placeholder = `${x}`;
           input.readOnly = true;
+          input.classList = "input";
           if (houses_inputs[i - 1] - basements[i - 1] < x) {
             input.classList.add("basements");
           }
@@ -622,11 +641,12 @@
     <div id="settings">
       <ul>
         <li>
-          <p>Server</p>
-          <input type="text" id="server-link-input" />
+          <p class="select">Server</p>
+          <input type="text" class="input" id="server-input" />
         </li>
-        <li><p>Lokal</p></li>
         <br />
+        <li><p class="select">Lokal</p></li>
+        <br /><br />
         <li><p class="button">weiter</p></li>
       </ul>
       <ul></ul>
