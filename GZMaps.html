@@ -53,15 +53,11 @@
       }
 
       html,
-      body {
+      body,
+      #app,
+      #settings {
         height: 100dvh;
         width: 100dvw;
-      }
-
-      body {
-        display: grid;
-        background: var(--background-color);
-        grid-template-rows: 10% 80% 10%;
       }
 
       .hidden {
@@ -91,6 +87,7 @@
 
       .button {
         background: var(--button-color);
+        width: max-content;
         padding: 5%;
         border-radius: 7px;
         margin: 5%;
@@ -98,6 +95,37 @@
 
       .button:hover {
         background: var(--button-color-hover);
+      }
+
+      #settings {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        background: radial-gradient(
+          var(--background-second-color),
+          var(--background-color) 100%
+        );
+        justify-content: center;
+        align-items: center;
+      }
+
+      #settings ul {
+        width: 80dvw;
+      }
+
+      #settings ul li {
+        display: grid;
+        justify-content: center;
+      }
+
+      #settings ul li .button {
+        justify-self: center;
+      }
+
+      #app {
+        display: grid;
+        background: var(--background-color);
+        grid-template-rows: 10% 80% 10%;
       }
 
       #edit-button {
@@ -361,7 +389,7 @@
       ];
 
       const houses_ids = [
-        "back-to-full-map",
+        "full-map-back",
         "house-1",
         "house-2",
         "house-3",
@@ -591,61 +619,97 @@
     </script>
   </head>
   <body>
-    <header class="bar">
-      <p class="bar-text headline" id="header">GZMaps - Gesamte Karte</p>
-    </header>
-    <main>
-      <div class="hidden" id="edit-bar">
-        <p class="button" id="back-to-full-map">Zurück</p>
-        <p class="button" id="edit-button">Bearbeiten</p>
-      </div>
-      <div id="full-map">
-        <div class="houses" id="house-1">
-          <p>1</p>
+    <div id="settings">
+      <ul>
+        <li>
+          <p>Server</p>
+          <input type="text" id="server-link-input" />
+        </li>
+        <li><p>Lokal</p></li>
+        <br />
+        <li><p class="button">weiter</p></li>
+      </ul>
+      <ul></ul>
+    </div>
+
+    <div id="app">
+      <header class="bar">
+        <p class="bar-text headline" id="header">GZMaps - Gesamte Karte</p>
+      </header>
+      <main>
+        <div class="hidden" id="edit-bar">
+          <p class="button" id="full-map-back">Zurück</p>
+          <p class="button" id="edit-button">Bearbeiten</p>
         </div>
-        <div class="houses" id="house-2">
-          <p>2</p>
+        <div id="full-map">
+          <div class="houses" id="house-1">
+            <p>1</p>
+          </div>
+          <div class="houses" id="house-2">
+            <p>2</p>
+          </div>
+          <div class="houses" id="house-3">
+            <p>3</p>
+          </div>
+          <div class="houses" id="house-4">
+            <p>4</p>
+          </div>
+          <div class="houses" id="house-5">
+            <p>5</p>
+          </div>
+          <div class="houses" id="house-6">
+            <p>6</p>
+          </div>
+          <div class="houses" id="house-8">
+            <p>8</p>
+          </div>
+          <div class="houses" id="house-11">
+            <p>11</p>
+          </div>
+          <div class="corridor-1 corridors"></div>
+          <div class="corridor-2 corridors"></div>
+          <div class="corridor-3 corridors"></div>
         </div>
-        <div class="houses" id="house-3">
-          <p>3</p>
+        <div
+          class="house-1-map houses-map not-displayed"
+          id="house-1-map"
+        ></div>
+        <div
+          class="house-2-map houses-map not-displayed"
+          id="house-2-map"
+        ></div>
+        <div
+          class="house-3-map houses-map not-displayed"
+          id="house-3-map"
+        ></div>
+        <div
+          class="house-4-map houses-map not-displayed"
+          id="house-4-map"
+        ></div>
+        <div
+          class="house-5-map houses-map not-displayed"
+          id="house-5-map"
+        ></div>
+        <div
+          class="house-6-map houses-map not-displayed"
+          id="house-6-map"
+        ></div>
+        <div
+          class="house-8-map houses-map not-displayed"
+          id="house-8-map"
+        ></div>
+        <div
+          class="house-11-map houses-map not-displayed"
+          id="house-11-map"
+        ></div>
+        <div id="save-bar">
+          <p class="button hidden" id="save-button">Speichern</p>
         </div>
-        <div class="houses" id="house-4">
-          <p>4</p>
-        </div>
-        <div class="houses" id="house-5">
-          <p>5</p>
-        </div>
-        <div class="houses" id="house-6">
-          <p>6</p>
-        </div>
-        <div class="houses" id="house-8">
-          <p>8</p>
-        </div>
-        <div class="houses" id="house-11">
-          <p>11</p>
-        </div>
-        <div class="corridor-1 corridors"></div>
-        <div class="corridor-2 corridors"></div>
-        <div class="corridor-3 corridors"></div>
-      </div>
-      <div class="house-1-map houses-map not-displayed" id="house-1-map"></div>
-      <div class="house-2-map houses-map not-displayed" id="house-2-map"></div>
-      <div class="house-3-map houses-map not-displayed" id="house-3-map"></div>
-      <div class="house-4-map houses-map not-displayed" id="house-4-map"></div>
-      <div class="house-5-map houses-map not-displayed" id="house-5-map"></div>
-      <div class="house-6-map houses-map not-displayed" id="house-6-map"></div>
-      <div class="house-8-map houses-map not-displayed" id="house-8-map"></div>
-      <div
-        class="house-11-map houses-map not-displayed"
-        id="house-11-map"
-      ></div>
-      <div id="save-bar">
-        <p class="button hidden" id="save-button">Speichern</p>
-      </div>
-    </main>
-    <footer class="bar">
-      <p class="bar-text" id="copyright"></p>
-      <p class="bar-text">Rimolo13 and Mocbuilder</p>
-    </footer>
+      </main>
+      <footer class="bar">
+        <p class="bar-text" id="copyright"></p>
+        <p class="bar-text">Rimolo13 and Mocbuilder</p>
+      </footer>
+    </div>
   </body>
 </html>
