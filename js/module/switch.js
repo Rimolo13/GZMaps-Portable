@@ -1,4 +1,4 @@
-import { load_values,edit_mode } from "/js/module/inputs.js";
+import { load_values, edit_mode } from "/js/module/inputs.js";
 
 const routes = [
   "#full-map",
