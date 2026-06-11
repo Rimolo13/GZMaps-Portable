@@ -60,13 +60,13 @@
         width: 100dvw;
       }
 
+      .not-displayed {
+        display: none !important;
+      }
+
       .hidden {
         opacity: 0;
         pointer-events: none;
-      }
-
-      .not-displayed {
-        display: none !important;
       }
 
       .headline {
@@ -362,7 +362,6 @@
         }
       }
     </style>
-    <script></script>
     <script type="module">
       //switch
       const routes = [
@@ -414,6 +413,22 @@
       ];
 
       const edit_bar = document.getElementById("edit-bar");
+
+      let edit_button = document.getElementById("edit-button");
+      let save_button = document.getElementById("save-button");
+
+      const houses_inputs = [10, 10, 18, 5, 4, 3, 6, 2];
+      const basements = [2, 2, 3, 1, 1, 1, 2, 0];
+      let input_list = [];
+      let value_list = [];
+
+      let edit_mode = 0;
+
+      const full_map = document.getElementById("full-map");
+      const height_70p = (window.innerHeight / 100) * 70;
+
+      const copyright = document.getElementById("copyright");
+      let date_now = new Date();
 
       ["load", "popstate"].forEach((e) => window.addEventListener(e, repage));
 
@@ -467,14 +482,6 @@
       }
 
       //input
-      let edit_button = document.getElementById("edit-button");
-      let save_button = document.getElementById("save-button");
-
-      const houses_inputs = [10, 10, 18, 5, 4, 3, 6, 2];
-      const basements = [2, 2, 3, 1, 1, 1, 2, 0];
-      let input_list = [];
-      let value_list = [];
-
       for (let i = 1; i < houses_maps_ids.length; i++) {
         let map = document.getElementById(houses_maps_ids[i]);
         for (let x = 1; x <= houses_inputs[i - 1]; x++) {
@@ -513,7 +520,6 @@
         edit_switch();
       }
 
-      export let edit_mode = 0;
       async function edit_switch() {
         if (edit_mode == 0) {
           const getpassword = prompt("Password:");
@@ -567,7 +573,8 @@
       }
 
       load_values();
-      export async function load_values() {
+
+      async function load_values() {
         try {
           value_list = (await (await fetch("/t/GETMapData")).json()).values;
           load();
@@ -583,9 +590,6 @@
       }
 
       //scale
-      const full_map = document.getElementById("full-map");
-      const height_70p = (window.innerHeight / 100) * 70;
-
       correct_resize();
 
       window.addEventListener("resize", () => {
@@ -603,8 +607,6 @@
       }
 
       //copyright
-      const copyright = document.getElementById("copyright");
-      let date_now = new Date();
       copyright.textContent = `©${date_now.getUTCFullYear()}\u00A0`;
     </script>
   </head>
