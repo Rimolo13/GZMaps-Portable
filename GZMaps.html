@@ -414,6 +414,13 @@
       //================================================================
       //var
       //================================================================
+      const maps = document.getElementById("maps");
+      const full_map = document.getElementById("full-map");
+      const edit_bar = document.getElementById("edit-bar");
+      const edit_button = document.getElementById("edit-button");
+      const save_button = document.getElementById("save-button");
+      const copyright = document.getElementById("copyright");
+
       const title_maps = [
         "Gesamte Karte",
         "Haus 1",
@@ -443,18 +450,9 @@
       const houses_inputs = [10, 10, 18, 5, 4, 3, 6, 2];
       const basements = [2, 2, 3, 1, 1, 1, 2, 0];
 
-      const maps = document.getElementById("maps");
-      const full_map = document.getElementById("full-map");
-      const edit_bar = document.getElementById("edit-bar");
-      const edit_button = document.getElementById("edit-button");
-      const save_button = document.getElementById("save-button");
-      const copyright = document.getElementById("copyright");
-
       let input_list = [];
       let value_list = [];
       let edit_mode = 0;
-
-      const height_70p = (window.innerHeight / 100) * 70;
 
       const date_now = new Date();
 
@@ -549,6 +547,7 @@
 
       correct_resize();
       function correct_resize() {
+        const height_70p = (window.innerHeight / 100) * 70;
         if (window.innerWidth < height_70p) {
           full_map.classList.add("full-map-scale-width");
           full_map.classList.remove("full-map-scale-hight");
