@@ -128,7 +128,7 @@
       }
 
       #settings {
-        display: none;
+        display: grid;
         position: absolute;
         background: radial-gradient(
           var(--background-second-color),
@@ -403,8 +403,17 @@
         }
       }
     </style>
+    <!-- ################################################################ -->
+    <!-- Settings -->
+     <!-- ################################################################ -->
+    <script type="module"></script>
+    <!-- ################################################################ -->
+    <!-- App -->
+    <!-- ################################################################ -->
     <script type="module">
+      //================================================================
       //var
+      //================================================================
       const title_maps = [
         "Gesamte Karte",
         "Haus 1",
@@ -449,7 +458,9 @@
 
       const date_now = new Date();
 
+      //================================================================
       //var maker
+      //================================================================
       for (let i = 0; i < template_list.length; i++) {
         routes.push(`#${template_list[i]}`);
         if (i === 0) {
@@ -461,7 +472,9 @@
         }
       }
 
+      //================================================================
       //build
+      //================================================================
       function element_builder({
         element,
         id,
@@ -526,7 +539,27 @@
         }
       }
 
+      //================================================================
+      //scale
+      //================================================================
+      window.addEventListener("resize", () => {
+        setTimeout(correct_resize, 300);
+      });
+
+      correct_resize();
+      function correct_resize() {
+        if (window.innerWidth < height_70p) {
+          full_map.classList.add("full-map-scale-width");
+          full_map.classList.remove("full-map-scale-hight");
+        } else {
+          full_map.classList.add("full-map-scale-hight");
+          full_map.classList.remove("full-map-scale-width");
+        }
+      }
+
+      //================================================================
       //switch
+      //================================================================
       [("load", "popstate")].forEach((e) => window.addEventListener(e, repage));
 
       function repage() {
@@ -578,7 +611,9 @@
         }
       }
 
+      //================================================================
       //input
+      //================================================================
       edit_button.addEventListener("click", edit_switch);
       save_button.addEventListener("click", save);
 
@@ -667,23 +702,9 @@
         }
       }
 
-      //scale
-      window.addEventListener("resize", () => {
-        setTimeout(correct_resize, 300);
-      });
-
-      correct_resize();
-      function correct_resize() {
-        if (window.innerWidth < height_70p) {
-          full_map.classList.add("full-map-scale-width");
-          full_map.classList.remove("full-map-scale-hight");
-        } else {
-          full_map.classList.add("full-map-scale-hight");
-          full_map.classList.remove("full-map-scale-width");
-        }
-      }
-
+      //================================================================
       //copyright
+      //================================================================
       copyright.textContent = `©${date_now.getUTCFullYear()}\u00A0`;
     </script>
   </head>
