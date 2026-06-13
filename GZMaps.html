@@ -128,7 +128,7 @@
       }
 
       #settings {
-        display: grid;
+        display: none;
         position: absolute;
         background: radial-gradient(
           var(--background-second-color),
@@ -206,6 +206,10 @@
         justify-content: end;
         align-items: end;
         flex-direction: column;
+      }
+
+      #maps {
+        display: grid;
       }
 
       #full-map {
@@ -427,20 +431,22 @@
       let houses_ids = [];
       let houses_maps_ids = [];
 
+      const houses_inputs = [10, 10, 18, 5, 4, 3, 6, 2];
+      const basements = [2, 2, 3, 1, 1, 1, 2, 0];
+
+      const maps = document.getElementById("maps");
+      const full_map = document.getElementById("full-map");
       const edit_bar = document.getElementById("edit-bar");
       const edit_button = document.getElementById("edit-button");
       const save_button = document.getElementById("save-button");
+      const copyright = document.getElementById("copyright");
 
-      const houses_inputs = [10, 10, 18, 5, 4, 3, 6, 2];
-      const basements = [2, 2, 3, 1, 1, 1, 2, 0];
       let input_list = [];
       let value_list = [];
       let edit_mode = 0;
 
-      const full_map = document.getElementById("full-map");
       const height_70p = (window.innerHeight / 100) * 70;
 
-      const copyright = document.getElementById("copyright");
       const date_now = new Date();
 
       //var maker
@@ -452,6 +458,71 @@
         } else {
           houses_ids.push(template_list[i]);
           houses_maps_ids.push(`${template_list[i]}-map`);
+        }
+      }
+
+      //build
+      function element_builder({
+        element,
+        id,
+        classes,
+        textcontent,
+        type,
+        placeholder,
+        readonly,
+      }) {
+        const createdelement = document.createElement(element);
+        if (id) createdelement.id = id;
+        if (classes) createdelement.className = classes;
+        if (textcontent) createdelement.textContent = textcontent;
+        if (type) createdelement.type = type;
+        if (placeholder) createdelement.placeholder = placeholder;
+        if (readonly) createdelement.readOnly = readonly;
+        return createdelement;
+      }
+
+      for (let i = 1; i < houses_maps_ids.length; i++) {
+        //houses
+        const full_map_house = element_builder({
+          element: "div",
+          classes: "houses",
+          id: `${houses_ids[i]}`,
+        });
+        const full_map_house_number = element_builder({
+          element: "p",
+          textcontent: `${houses_ids[i].split("-")[1]}`,
+        });
+        full_map_house.appendChild(full_map_house_number);
+        full_map.appendChild(full_map_house);
+        //corridors
+        if (i < 4) {
+          const full_map_corridor = element_builder({
+            classes: `corridor-${i} corridors`,
+          });
+          full_map.appendChild(full_map_corridor);
+        }
+        //maps
+        const map = element_builder({
+          element: "div",
+          classes: `house-${i}-map houses-map not-displayed`,
+          id: `${houses_maps_ids[i]}`,
+        });
+        maps.appendChild(map);
+        //map input felds
+        for (let x = 1; x <= houses_inputs[i - 1]; x++) {
+          const input = element_builder({
+            element: "input",
+            id: `h${i}-${x}`,
+            classes: "input",
+            type: "Text",
+            placeholder: `${x}`,
+            readonly: true,
+          });
+          if (houses_inputs[i - 1] - basements[i - 1] < x) {
+            input.classList.add("basements");
+          }
+          input_list.push(input);
+          map.appendChild(input);
         }
       }
 
@@ -508,23 +579,6 @@
       }
 
       //input
-      for (let i = 1; i < houses_maps_ids.length; i++) {
-        const map = document.getElementById(houses_maps_ids[i]);
-        for (let x = 1; x <= houses_inputs[i - 1]; x++) {
-          const input = document.createElement("input");
-          input.type = "Text";
-          input.id = `h${i}-${x}`;
-          input.placeholder = `${x}`;
-          input.readOnly = true;
-          input.classList = "input";
-          if (houses_inputs[i - 1] - basements[i - 1] < x) {
-            input.classList.add("basements");
-          }
-          input_list.push(input);
-          map.appendChild(input);
-        }
-      }
-
       edit_button.addEventListener("click", edit_switch);
       save_button.addEventListener("click", save);
 
@@ -669,67 +723,9 @@
           <p class="button" id="full-map-back">Zurück</p>
           <p class="button" id="edit-button">Bearbeiten</p>
         </div>
-        <div id="full-map">
-          <div class="houses" id="house-1">
-            <p>1</p>
-          </div>
-          <div class="houses" id="house-2">
-            <p>2</p>
-          </div>
-          <div class="houses" id="house-3">
-            <p>3</p>
-          </div>
-          <div class="houses" id="house-4">
-            <p>4</p>
-          </div>
-          <div class="houses" id="house-5">
-            <p>5</p>
-          </div>
-          <div class="houses" id="house-6">
-            <p>6</p>
-          </div>
-          <div class="houses" id="house-8">
-            <p>8</p>
-          </div>
-          <div class="houses" id="house-11">
-            <p>11</p>
-          </div>
-          <div class="corridor-1 corridors"></div>
-          <div class="corridor-2 corridors"></div>
-          <div class="corridor-3 corridors"></div>
+        <div id="maps">
+          <div id="full-map"></div>
         </div>
-        <div
-          class="house-1-map houses-map not-displayed"
-          id="house-1-map"
-        ></div>
-        <div
-          class="house-2-map houses-map not-displayed"
-          id="house-2-map"
-        ></div>
-        <div
-          class="house-3-map houses-map not-displayed"
-          id="house-3-map"
-        ></div>
-        <div
-          class="house-4-map houses-map not-displayed"
-          id="house-4-map"
-        ></div>
-        <div
-          class="house-5-map houses-map not-displayed"
-          id="house-5-map"
-        ></div>
-        <div
-          class="house-6-map houses-map not-displayed"
-          id="house-6-map"
-        ></div>
-        <div
-          class="house-8-map houses-map not-displayed"
-          id="house-8-map"
-        ></div>
-        <div
-          class="house-11-map houses-map not-displayed"
-          id="house-11-map"
-        ></div>
         <div id="save-bar">
           <p class="button hidden" id="save-button">Speichern</p>
         </div>
